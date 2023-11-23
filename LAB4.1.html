@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ЛР2 Аліни Атаманенко</title>
+
+  <style>
+    TABLE {
+      background: linear-gradient(#c1d4fb, #6699ff);
+      box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+  <form method="post" action="bar.php">
+    <table border="1" style="border-radius: 5px;">
+      <tr background="360deg, blue, red">
+        <th>Pizza shop</th>
+        <th>My order</th>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>
+          <input type="text" name="name" size="25" required placeholder="Enter your name">
+        </td>
+      </tr>
+      <tr>
+        <td>Pizza topping</td>
+        <td>
+          <input type="radio" name="Pizza toppin" value="male"> Supreme
+          <br>
+          <input type="radio" name="Pizza toppin" value="female" checked> Vegetarian
+          <br>
+          <input type="radio" name="Pizza toppin" value="female"> Hawaiian
+        </td>
+      </tr>
+      <tr>
+        <td>Pizza sauce</td>
+        <td>
+          <select name="Pizza sauce">
+            <option>Tomato</option>
+            <option>Cheese</option>
+            <option selected>Creamy</option>
+            <option>other</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Optional extras</td>
+        <td>
+          <input type="checkbox" name="height" value="1">Extra cheese</input>
+          <br>
+          <input type="checkbox" name="weight" value="1">Gluten-free base</input>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Delivery instructions:<br>
+          <textarea name="athletic" cols="50" rows="4" required placeholder="Type here"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <input type="button" value="Замовити" onclick="addOrder()">
+        </td>
+      </tr>
+    </table>
+
+    <!-- Таблиця для відображення замовлень -->
+    <table border="1" id="ordersTable" style="border-radius: 5px; margin-top: 20px;">
+      <tr>
+        <th>Назва</th>
+        <th>Тип піци</th>
+        <th>Соус</th>
+        <th>Додаткові опції</th>
+        <th>Інструкція</th>
+      </tr>
+      <!-- 8 варіантів рядків -->
+      <tr>
+        <td>Margarita</td>
+        <td>Vegetarian</td>
+        <td>Tomato</td>
+        <td>None</td>
+        <td>No special instructions</td>
+      </tr>
+      <tr>
+        <td>Piter</td>
+        <td>Supreme</td>
+        <td>Cheese</td>
+        <td>Extra cheese</td>
+        <td>Extra spicy</td>
+      </tr>
+      <tr>
+        <td>Henry</td>
+        <td>Hawaiian</td>
+        <td>Creamy</td>
+        <td>Pineapple</td>
+        <td>No onions</td>
+      </tr>
+      <tr>
+        <td>Veronika</td>
+        <td>Vegetarian</td>
+        <td>Tomato</td>
+        <td>Extra cheese, Mushrooms</td>
+        <td>Light on sauce</td>
+      </tr>
+      <tr>
+        <td>Maks</td>
+        <td>Supreme</td>
+        <td>Cheese</td>
+        <td>Extra meat</td>
+        <td>Extra crispy crust</td>
+      </tr>
+      <tr>
+        <td>Kris</td>
+        <td>Supreme</td>
+        <td>Other</td>
+        <td>BBQ Sauce</td>
+        <td>No tomatoes</td>
+      </tr>
+      <tr>
+        <td>Sofi</td>
+        <td>Other</td>
+        <td>Creamy</td>
+        <td>Extra shrimp, Garlic butter</td>
+        <td>No onions</td>
+      </tr>
+      <tr>
+        <td>Ann</td>
+        <td>Supreme</td>
+        <td>Other</td>
+        <td>Custom toppings</td>
+        <td>Follow instructions</td>
+      </tr>
+    </table>
+
+    <script>
+      function addOrder() {
+        var pizzaName = document.getElementsByName("name")[0].value;
+        var pizzaToppin = document.querySelector('input[name="Pizza toppin"]:checked').value;
+        var pizzaSauce = document.getElementsByName("Pizza sauce")[0].value;
+
+        var extras = [];
+        var checkboxes = document.querySelectorAll('input[name="height"]:checked');
+        checkboxes.forEach(function (checkbox) {
+          extras.push(checkbox.value);
+        });
+
+        var instructions = document.getElementsByName("athletic")[0].value;
+
+        var table = document.getElementById("ordersTable");
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+
+        cell1.innerHTML = pizzaName;
+        cell2.innerHTML = pizzaToppin;
+        cell3.innerHTML = pizzaSauce;
+        cell4.innerHTML = extras.join(", ");
+        cell5.innerHTML = instructions;
+      }
+    </script>
+  </form>
+</body>
+
+</html>

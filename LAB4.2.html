@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Словник</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    input {
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    #error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h2>Словник</h2>
+  <form id="dictionaryForm">
+    <label for="word">Введіть слово: </label>
+    <input type="text" id="word" required>
+    <button type="button" onclick="searchWord()">Пошук</button>
+  </form>
+  <div id="result"></div>
+  <div id="error"></div>
+
+  <script>
+    // Хеш-таблиця для зберігання пар слів і значень
+    const dictionary = {
+      "apple": "яблуко",
+      "banana": "банан",
+      "orange": "апельсин",
+      // Додайте інші пари слів і значень за потреби
+    };
+
+    function searchWord() {
+      const inputElement = document.getElementById("word");
+      const resultElement = document.getElementById("result");
+      const errorElement = document.getElementById("error");
+
+      const userInput = inputElement.value.toLowerCase();
+      const foundTranslation = dictionary[userInput];
+
+      if (foundTranslation) {
+        resultElement.textContent = `Переклад: ${foundTranslation}`;
+        errorElement.textContent = "";
+      } else {
+        resultElement.textContent = "";
+        errorElement.textContent = "Слово не знайдено";
+      }
+
+      // Очистимо поле введення
+      inputElement.value = "";
+    }
+  </script>
+</body>
+</html>
